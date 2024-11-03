@@ -1,0 +1,60 @@
+{
+    "name": "galactic-spacefarer-adventure",
+    "version": "1.0.0",
+    "description": "A simple CAP project.",
+    "repository": "<Add your repository here>",
+    "license": "UNLICENSED",
+    "private": true,
+    "dependencies": {
+        "@sap/cds": "^7",
+        "express": "^4"
+    },
+    "devDependencies": {
+        "@cap-js/sqlite": "^1.7.5"
+    },
+    "scripts": {
+        "start": "cds-serve"
+    },
+    "cds": {
+        "requires": {
+            "db": {
+                "[development]": {
+                    "kind": "sqlite",
+                    "impl": "@cap-js/sqlite",
+                    "credentials": {
+                    "url": "db.sqlite"
+                    }
+                }   
+            },
+            "auth": {
+                "kind": "basic",
+                "users": {
+                    "Anakin Skywalker": {
+                        "password": "IHateSand",
+                        "attr": {
+                            "planet": "Tatooine",
+                            "department": "Jedi Order",
+                            "position": "Jedi Knight"
+                        }
+                    },
+                    "Han Solo": {
+                        "password": "Furball",
+                        "attr": {
+                            "planet": "Corellia",
+                            "department": "Rebel Alliance",
+                            "position": "Pilot"
+                        }
+                    },
+                    "Emperor Palpatine": {
+                        "password": "UnlimitedPower",
+                        "attr": {
+                            "planet": "Naboo",
+                            "department": "Galactic Empire",
+                            "position": "Emperor"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

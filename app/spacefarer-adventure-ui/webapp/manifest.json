@@ -1,0 +1,218 @@
+{
+    "_version": "1.59.0",
+    "sap.app": {
+        "id": "com.aldi.assignment.adventure.ui.spacefareradventureui",
+        "type": "application",
+        "i18n": "i18n/i18n.properties",
+        "applicationVersion": {
+            "version": "0.0.1"
+        },
+        "title": "{{appTitle}}",
+        "description": "{{appDescription}}",
+        "resources": "resources.json",
+        "sourceTemplate": {
+            "id": "@sap/generator-fiori:lrop",
+            "version": "1.12.3",
+            "toolsId": "6dadd8a6-5370-40c0-bb86-51c0809fa29e"
+        },
+        "dataSources": {
+            "mainService": {
+                "uri": "/odata/v4/galactic-spacefarer/",
+                "type": "OData",
+                "settings": {
+                    "annotations": [],
+                    "odataVersion": "4.0"
+                }
+            }
+        }
+    },
+    "sap.ui": {
+        "technology": "UI5",
+        "icons": {
+            "icon": "",
+            "favIcon": "",
+            "phone": "",
+            "phone@2": "",
+            "tablet": "",
+            "tablet@2": ""
+        },
+        "deviceTypes": {
+            "desktop": true,
+            "tablet": true,
+            "phone": true
+        }
+    },
+    "sap.ui5": {
+        "flexEnabled": true,
+        "dependencies": {
+            "minUI5Version": "1.130.0",
+            "libs": {
+                "sap.m": {},
+                "sap.ui.core": {},
+                "sap.ushell": {},
+                "sap.fe.templates": {},
+                "sap.f": {}
+            }
+        },
+        "contentDensities": {
+            "compact": true,
+            "cozy": true
+        },
+        "models": {
+            "i18n": {
+                "type": "sap.ui.model.resource.ResourceModel",
+                "settings": {
+                    "bundleName": "com.aldi.assignment.adventure.ui.spacefareradventureui.i18n.i18n"
+                }
+            },
+            "": {
+                "dataSource": "mainService",
+                "preload": true,
+                "settings": {
+                    "synchronizationMode": "None",
+                    "operationMode": "Server",
+                    "autoExpandSelect": true,
+                    "earlyRequests": true
+                }
+            },
+            "@i18n": {
+                "type": "sap.ui.model.resource.ResourceModel",
+                "uri": "i18n/i18n.properties"
+            }
+        },
+        "resources": {
+            "css": []
+        },
+        "routing": {
+            "config": {
+                "flexibleColumnLayout": {
+                    "defaultTwoColumnLayoutType": "TwoColumnsMidExpanded",
+                    "defaultThreeColumnLayoutType": "ThreeColumnsMidExpanded"
+                },
+                "routerClass": "sap.f.routing.Router"
+            },
+            "routes": [
+                {
+                    "pattern": ":?query:",
+                    "name": "GalacticSpacefarerList",
+                    "target": [
+                        "GalacticSpacefarerList"
+                    ]
+                },
+                {
+                    "pattern": "GalacticSpacefarer({key}):?query:",
+                    "name": "GalacticSpacefarerObjectPage",
+                    "target": [
+                        "GalacticSpacefarerList",
+                        "GalacticSpacefarerObjectPage"
+                    ]
+                }
+            ],
+            "targets": {
+                "GalacticSpacefarerList": {
+                    "type": "Component",
+                    "id": "GalacticSpacefarerList",
+                    "name": "sap.fe.templates.ListReport",
+                    "options": {
+                        "settings": {
+                            "contextPath": "/GalacticSpacefarer",
+                            "variantManagement": "Page",
+                            "navigation": {
+                                "GalacticSpacefarer": {
+                                    "detail": {
+                                        "route": "GalacticSpacefarerObjectPage"
+                                    }
+                                }
+                            },
+                            "initialLoad": "Enabled",
+                            "controlConfiguration": {
+                                "@com.sap.vocabularies.UI.v1.LineItem": {
+                                    "columns": {
+                                        "DataField::user": {
+                                            "width": "14.25%",
+                                            "widthIncludingColumnHeader": true
+                                        },
+                                        "DataField::position::department_name": {
+                                            "width": "14.25%",
+                                            "widthIncludingColumnHeader": true
+                                        },
+                                        "DataField::originPlanet": {
+                                            "width": "14.25%",
+                                            "widthIncludingColumnHeader": true
+                                        },
+                                        "DataField::stardustCollection_name": {
+                                            "width": "14.25%",
+                                            "widthIncludingColumnHeader": true
+                                        },
+                                        "DataField::wormholeNavigationSkill_name": {
+                                            "width": "14.25%",
+                                            "widthIncludingColumnHeader": true
+                                        },
+                                        "DataField::spacesuitColor_name": {
+                                            "width": "14.25%",
+                                            "widthIncludingColumnHeader": true
+                                        },
+                                        "DataField::position::name": {
+                                            "width": "14.25%",
+                                            "widthIncludingColumnHeader": true
+                                        },
+                                        "DataField::wormholeNavigationSkill_code": {
+                                            "widthIncludingColumnHeader": true,
+                                            "width": "14.25%"
+                                        },
+                                        "DataField::stardustCollection_code": {
+                                            "width": "14.25%",
+                                            "widthIncludingColumnHeader": true
+                                        },
+                                        "DataField::spacesuitColor_code": {
+                                            "width": "14.25%",
+                                            "widthIncludingColumnHeader": true
+                                        },
+                                        "DataField::department::ID": {
+                                            "width": "14.25%",
+                                            "widthIncludingColumnHeader": true
+                                        },
+                                        "DataField::position::ID": {
+                                            "width": "14.25%",
+                                            "widthIncludingColumnHeader": true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "controlAggregation": "beginColumnPages",
+                    "contextPattern": ""
+                },
+                "GalacticSpacefarerObjectPage": {
+                    "type": "Component",
+                    "id": "GalacticSpacefarerObjectPage",
+                    "name": "sap.fe.templates.ObjectPage",
+                    "options": {
+                        "settings": {
+                            "editableHeaderContent": false,
+                            "contextPath": "/GalacticSpacefarer",
+                            "content": {
+                                "header": {
+                                    "anchorBarVisible": false
+                                }
+                            }
+                        }
+                    },
+                    "controlAggregation": "midColumnPages",
+                    "contextPattern": "/GalacticSpacefarer({key})"
+                }
+            }
+        },
+        "rootView": {
+            "viewName": "sap.fe.templates.RootContainer.view.Fcl",
+            "type": "XML",
+            "async": true,
+            "id": "appRootView"
+        }
+    },
+    "sap.fiori": {
+        "registrationIds": [],
+        "archeType": "transactional"
+    }
+}

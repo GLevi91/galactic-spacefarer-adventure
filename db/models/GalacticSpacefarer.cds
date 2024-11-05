@@ -1,57 +1,69 @@
 namespace com.aldi.assignment.adventure;
 
-using { cuid, User } from '@sap/cds/common';
+using { cuid, sap.common.CodeList, User } from '@sap/cds/common';
 
 entity GalacticSpacefarer : cuid {
-    user                    : User @cds.on.insert : $user;
-    startdustCollection     : CollectionSize;
-    wormholeNavigationSkill : Rating;
+    key user                : User @cds.on.insert : $user;
+    stardustCollection      : Association to one CollectionSize;
+    wormholeNavigationSkill : Association to one Rating;
     originPlanet            : String;
-    spacesuitColor          : Color;
-    department              : Association to one IntergalacticDepartments;
-    position                : Association to one IntergalacticPositions;
+    spacesuitColor          : Association to one Color;
+    department              : Association to one IntergalacticDepartment;
+    position                : Association to one IntergalacticPosition;
 }
 
 annotate GalacticSpacefarer with @(restrict: [
-    { grant: 'READ', where: 'originPlanet = $user.planet' },
-    { grant: ['UPDATE', 'DELETE'], where: 'user = $user' } ]);
+    { grant: '*', where: 'originPlanet = $user.planet' } ]);
 
-entity IntergalacticDepartments : cuid{
-    name    : String @cds.on.insert : $user.department;
-    positions   : Composition of many IntergalacticPositions on positions.department = $self;
+entity IntergalacticDepartment : cuid {
+    name  : String;
+    positions : Composition of many IntergalacticPosition on positions.department = $self;
 }
 
-entity IntergalacticPositions : cuid {
-    name   : String @cds.on.insert : $user.position;
-    department : Association to IntergalacticDepartments;
+entity IntergalacticPosition : cuid {
+    name       : String;
+    department : Association to one IntergalacticDepartment;
 }
 
-type Rating: Integer enum {
-    Expert   = 5;
-    Advanced = 4;
-    Mediocre = 3;
-    Novice   = 2;
-    Beginner = 1;
+@cds.autoExpose
+@readonly
+entity Rating : CodeList {
+    key code : Integer enum {
+        Expert = 5;
+        Advanced = 4;
+        Mediocre = 3;
+        Novice = 2;
+        Beginner = 1;
+    }
 }
 
-type CollectionSize: Integer enum {
-    Enormous = 5;
-    Huge     = 4;
-    Average  = 3;
-    Small    = 2;
-    Tiny     = 1;
+@cds.autoExpose
+@readonly
+entity CollectionSize : CodeList {
+    key code : Integer enum {
+        Enormous = 5;
+        Huge = 4;
+        Average = 3;
+        Small = 2;
+        Tiny = 1;
+    }
 }
 
-type Color: String enum {
-    Black;
-    Blue;
-    Brown;
-    Green;
-    Orange;
-    Pink;
-    Purple;
-    Rainbow;
-    Red;
-    White;
-    Yellow;
+@cds.autoExpose
+@readonly
+entity Color : CodeList{ 
+    key code : String enum {
+        Black;
+        Blue;
+        Brown;
+        Gray;
+        Green;
+        Orange;
+        Pink;
+        Purple;
+        Rainbow;
+        Red;
+        White;
+        Yellow;
+    }
 }

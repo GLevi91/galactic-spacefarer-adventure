@@ -3,10 +3,10 @@ namespace com.aldi.assignment.adventure;
 using { cuid, sap.common.CodeList, User } from '@sap/cds/common';
 
 entity GalacticSpacefarer : cuid {
-    key user                : User @cds.on.insert : $user;
+    user                    : User @cds.on.insert : $user;
     stardustCollection      : Association to one CollectionSize;
     wormholeNavigationSkill : Association to one Rating;
-    originPlanet            : String;
+    originPlanet            : String @cds.on.insert : $user.planet;
     spacesuitColor          : Association to one Color;
     department              : Association to one IntergalacticDepartment;
     position                : Association to one IntergalacticPosition;
@@ -29,10 +29,10 @@ entity IntergalacticPosition : cuid {
 @readonly
 entity Rating : CodeList {
     key code : Integer enum {
-        Expert = 5;
+        Expert   = 5;
         Advanced = 4;
         Mediocre = 3;
-        Novice = 2;
+        Novice   = 2;
         Beginner = 1;
     }
 }
@@ -42,10 +42,10 @@ entity Rating : CodeList {
 entity CollectionSize : CodeList {
     key code : Integer enum {
         Enormous = 5;
-        Huge = 4;
-        Average = 3;
-        Small = 2;
-        Tiny = 1;
+        Huge     = 4;
+        Average  = 3;
+        Small    = 2;
+        Tiny     = 1;
     }
 }
 

@@ -113,11 +113,6 @@ annotate service.GalacticSpacefarer with @(
             },
             {
                 $Type : 'UI.DataField',
-                Label : '{i18n>Originplanet}',
-                Value : originPlanet,
-            },
-            {
-                $Type : 'UI.DataField',
                 Label : '{i18n>Wormholenavigationskill}',
                 Value : wormholeNavigationSkill_code,
             },
@@ -142,9 +137,6 @@ annotate service.GalacticSpacefarer with @(
         },
     ]
 );
-annotate service.GalacticSpacefarer with {
-    originPlanet @Common.Label : '{i18n>Originplanet}'
-};
 
 annotate service.GalacticSpacefarer with {
     department @(

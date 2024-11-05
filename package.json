@@ -1,59 +1,58 @@
 {
-  "name": "galactic-spacefarer-adventure",
-  "version": "1.0.0",
-  "description": "A simple CAP project.",
-  "repository": "<Add your repository here>",
-  "license": "UNLICENSED",
-  "private": true,
-  "dependencies": {
-    "@sap/cds": "^7",
-    "express": "^4"
-  },
-  "devDependencies": {
-    "@cap-js/sqlite": "^1.7.5",
-    "@sap/ux-specification": "^1.124.4"
-  },
-  "cds": {
-    "requires": {
-      "db": {
-        "[development]": {
-          "kind": "sqlite",
-          "impl": "@cap-js/sqlite",
-          "credentials": {
-            "url": "db.sqlite"
-          }
+    "name": "galactic-spacefarer-adventure",
+    "version": "1.0.0",
+    "description": "A simple CAP project.",
+    "repository": "<Add your repository here>",
+    "license": "UNLICENSED",
+    "private": true,
+    "dependencies": {
+        "@sap/cds": "^7",
+        "express": "^4"
+    },
+    "devDependencies": {
+        "@cap-js/sqlite": "^1.7.5",
+        "@sap/ux-specification": "^1.124.4"
+    },
+    "cds": {
+        "requires": {
+            "db": {
+                "[development]": {
+                    "kind": "sqlite",
+                    "impl": "@cap-js/sqlite",
+                    "credentials": {
+                        "url": "db.sqlite"
+                    }
+                }
+            },
+            "auth": {
+                "kind": "basic",
+                "users": {
+                    "Anakin Skywalker": {
+                        "password": "IHateSand",
+                        "attr": {
+                            "planet": "Tatooine"
+                        }
+                    },
+                    "Han Solo": {
+                        "password": "Furball",
+                        "attr": {
+                            "planet": "Corellia"
+                        }
+                    },
+                    "Emperor Palpatine": {
+                        "password": "UnlimitedPower",
+                        "attr": {
+                            "planet": "Naboo"
+                        }
+                    }
+                }
+            }
         }
-      },
-      "auth": {
-        "kind": "basic",
-        "users": {
-          "Anakin Skywalker": {
-            "password": "IHateSand",
-            "attr": {
-              "planet": "Tatooine"
-            }
-          },
-          "Han Solo": {
-            "password": "Furball",
-            "attr": {
-              "planet": "Corellia"
-            }
-          },
-          "Emperor Palpatine": {
-            "password": "UnlimitedPower",
-            "attr": {
-              "planet": "Naboo"
-            }
-          }
-        }
-      }
-    }
-  },
-  "scripts": {
-    "watch-spacefarer-adventure-ui": "cds watch --open spacefarer-adventure-ui/webapp/index.html?sap-ui-xx-viewCache=false"
-  },
-  "sapux": [
-    "app/spacefarer-adventure-ui",
-    "app/spacefarer-adventure-ui"
-  ]
+    },
+    "scripts": {
+        "watch-spacefarer-adventure-ui": "cds watch --open spacefarer-adventure-ui/webapp/index.html?sap-ui-xx-viewCache=false"
+    },
+    "sapux": [
+        "app/spacefarer-adventure-ui"
+    ]
 }

@@ -9,6 +9,10 @@ annotate service.GalacticSpacefarer with @(
             $Type : 'UI.DataField',
             Value : user,
         },
+        Description : {
+            $Type : 'UI.DataField',
+            Value : originPlanet,
+        },
     },
 );
 
@@ -75,6 +79,7 @@ annotate service.GalacticSpacefarer with {
             ],
             PresentationVariantQualifier : 'vh_GalacticSpacefarer_stardustCollection',
         },
+        Common.FieldControl : #Mandatory,
     )
 };
 annotate service.GalacticSpacefarer with {
@@ -96,6 +101,7 @@ annotate service.GalacticSpacefarer with {
             ],
             PresentationVariantQualifier : 'vh_GalacticSpacefarer_wormholeNavigationSkill',
         },
+        Common.FieldControl : #Mandatory,
     )
 };
 
@@ -157,6 +163,7 @@ annotate service.GalacticSpacefarer with {
             ],
         },
         Common.ValueListWithFixedValues : true,
+        Common.FieldControl : #Mandatory,
     )
 };
 
@@ -177,13 +184,18 @@ annotate service.GalacticSpacefarer with {
                     ValueListProperty : 'ID',
                 },
                 {
-                    $Type : 'Common.ValueListParameterInOut',
+                    $Type : 'Common.ValueListParameterIn',
                     ValueListProperty : 'department/ID',
                     LocalDataProperty : department_ID,
-                }
+                },
+                {
+                    $Type : 'Common.ValueListParameterDisplayOnly',
+                    ValueListProperty : 'department/name',
+                },
             ],
         },
         Common.ValueListWithFixedValues : true,
+        Common.FieldControl : #Mandatory,
     )
 };
 
@@ -234,6 +246,7 @@ annotate service.GalacticSpacefarer with {
             ],
             PresentationVariantQualifier : 'vh_GalacticSpacefarer_spacesuitColor',
         },
+        Common.FieldControl : #Mandatory,
     )
 };
 
@@ -282,4 +295,8 @@ annotate service.Color with @(
         ],
     }
 );
+
+annotate service.GalacticSpacefarer with {
+    originPlanet @Common.Label : '{i18n>Originplanet}'
+};
 

@@ -2,11 +2,14 @@ namespace com.aldi.assignment.adventure;
 
 using { cuid, sap.common.CodeList, User } from '@sap/cds/common';
 
+@assert.unique: {
+    user: [user]
+}
 entity GalacticSpacefarer : cuid {
     user                    : User @cds.on.insert : $user;
     stardustCollection      : Association to one CollectionSize;
     wormholeNavigationSkill : Association to one Rating;
-    originPlanet            : String @cds.on.insert : $user.planet;
+    originPlanet            : String;
     spacesuitColor          : Association to one Color;
     department              : Association to one IntergalacticDepartment;
     position                : Association to one IntergalacticPosition;

@@ -7,11 +7,14 @@
     "private": true,
     "dependencies": {
         "@sap/cds": "^7",
-        "express": "^4"
+        "express": "^4",
+        "nodemailer": "^6",
+        "@sap-cloud-sdk/mail-client": "^3"
     },
     "devDependencies": {
         "@cap-js/sqlite": "^1.7.5",
-        "@sap/ux-specification": "^1.124.4"
+        "@sap/ux-specification": "^1.124.4",
+        "@sap-cloud-sdk/test-util": "^3"
     },
     "cds": {
         "requires": {
@@ -30,19 +33,22 @@
                     "Anakin Skywalker": {
                         "password": "IHateSand",
                         "attr": {
-                            "planet": "Tatooine"
+                            "planet": "Tatooine",
+                            "email": "anakin.skywalker@jedi.com"
                         }
                     },
                     "Han Solo": {
                         "password": "Furball",
                         "attr": {
-                            "planet": "Corellia"
+                            "planet": "Corellia",
+                            "email": "han.solo@smuggler.com"
                         }
                     },
                     "Emperor Palpatine": {
                         "password": "UnlimitedPower",
                         "attr": {
-                            "planet": "Naboo"
+                            "planet": "Naboo",
+                            "email": "shiev.palpatine@galacticempire.com"
                         }
                     }
                 }
@@ -50,6 +56,7 @@
         }
     },
     "scripts": {
+        "start": "cds watch",
         "watch-spacefarer-adventure-ui": "cds watch --open spacefarer-adventure-ui/webapp/index.html?sap-ui-xx-viewCache=false"
     },
     "sapux": [

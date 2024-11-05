@@ -1,13 +1,27 @@
-const cds = require('@sap/cds')
+const cds = require("@sap/cds")
+const { setTestDestination } = require("@sap-cloud-sdk/test-util");
+const {sendMail} = require("@sap-cloud-sdk/mail-client")
+const nodemailer = require("nodemailer")
+
+nodemailer.createTestAccount((err, account) => {
+    setTestDestination({
+        name: "MOCK_MAIL_DESTINATION",
+        type: "MAIL",
+        originalProperties: {
+            "mail.user": account.user,
+            "mail.password": account.pass,
+            "mail.smtp.host": account.smtp.host,
+            "mail.smtp.port": account.smtp.port,
+            "mail.smtp.auth": true,
+            "mail.smtp.ssl.enable": false,
+            "mail.smtp.starttls.required": true
+        }
+    })
+})
 
 module.exports = cds.service.impl(function () {
     this.before('CREATE', 'GalacticSpacefarer', async (req) => {
-        let user = req.user
-        const userResult = await SELECT('Count(user) as count').from('GalacticSpacefarerService.GalacticSpacefarer').where({user: user.id})
-
-        if (userResult[0].count > 0) {
-            throw new Error("User already exists!")
-        }
+        req.data.originPlanet = req.user.attr.planet;
 
         let stardustCollectionCode = req.data.stardustCollection_code
         let wormholeNavigationSkillCode = req.data.wormholeNavigationSkill_code
@@ -29,5 +43,17 @@ module.exports = cds.service.impl(function () {
         } else {
             return req.error(400, "Invalid wormhole navigation skill selected!")
         }
+    })
+
+    this.after('CREATE', 'GalacticSpacefarer', async (res, req) => {
+        const mailConfig = {
+            from: "spacefarer.adventure@aldi.com",
+            to: req.user.attr.email,
+            subject: "Congrats!",
+            text: "Congratulations for starting your adventurous journey among the stars!"
+        }
+        const mailResponse = await sendMail({ destinationName: 'MOCK_MAIL_DESTINATION' }, [mailConfig]);
+        console.log('Message sent: %s', mailResponse[0].messageId);
+        console.log('Preview URL: %s', nodemailer.getTestMessageUrl(mailResponse[0]));
     })
 })
